@@ -1,0 +1,256 @@
+# Your snippets
+#
+# Atom snippets allow you to enter a simple prefix in the editor and hit tab to
+# expand the prefix into a larger code block with templated values.
+#
+# You can create a new snippet in this file by typing "snip" and then hitting
+# tab.
+#
+# An example CoffeeScript snippet to expand log to console.log:
+#
+
+# Javascript
+'.source.js':
+  'Console log':
+    'prefix': 'log'
+    'body': 'console.log($1);'
+
+  'Debugger':
+    'prefix': 'debug'
+    'body': 'debugger;'
+
+  'PauseTest':
+    'prefix': 'pauseTest'
+    'body': 'return pauseTest();'
+
+  'AndThen':
+    'prefix': 'andThen'
+    'body': """
+      andThen(function() {
+        assert.equal($1)
+      });
+    """
+
+  'StopTest':
+    'prefix': 'stop'
+    'body': 'return stop();'
+  'test':
+    'prefix': 'test'
+    'body': """
+      test('$1', function(assert) {
+        $2
+      });
+    """
+  'authenticateSession':
+    'prefix': 'authenticateSession'
+    'body': """
+      authenticateSession({
+        permissions: {
+          $1
+        },
+      });
+    """
+
+  # Ember
+  'Run':
+    'prefix': 'run'
+    'body': """
+      Ember.run(()=> {
+        $1
+      });
+    """
+  'assert equal':
+    'prefix': 'equal'
+    'body': """
+      assert.equal(
+        ${1:_something_},
+        ${2:999},
+        '${3:description_of_assertion}'
+      );
+    """
+  'assert ok':
+    'prefix': 'ok'
+    'body': """
+      assert.ok(
+        ${1:_something_},
+        '${2:description_of_assertion}'
+      );
+    """
+  'assert notOk':
+    'prefix': 'notOk'
+    'body': """
+      assert.notOk(
+        ${1:_something_},
+        '${2:description_of_assertion}'
+      );
+    """
+  'ember-object-create':
+    'prefix': 'object'
+    'body': """
+      Ember.Object.create()
+    """
+  'test-invalid-props':
+    'prefix': 'invalid'
+    'body': """
+      testInvalidPropertyValues('${1:prop}', [
+        ${2:something},
+      ], function(subject) {
+        subject.set('${3:prop}', Ember.Object.create());
+      });
+    """
+  'test-valid-props':
+    'prefix': 'valid'
+    'body': """
+      testValidPropertyValues('${1:prop}', [
+        ${2:something},
+      ], function(subject) {
+        subject.set('${3:prop}', Ember.Object.create());
+      });
+    """
+  'testForValidator':
+    'prefix': 'validations'
+    'body': """
+      testForValidator('${1:keyName}')
+        .toAllow(
+          '${2:value}'
+        )
+        .toReject(
+          '${3:value}'
+        );
+    """
+
+# Handlbars
+'.text.html.handlebars':
+  'data-role':
+    'prefix': 'dr'
+    'body': 'data-role="$1"'
+
+  'modal-container':
+    'prefix': 'modal-container'
+    'body': """
+      {{#modal/modal-container
+        buttonClass="$1"
+        as |hideModal|}}
+        $2
+      {{/modal/modal-container}}
+    """
+
+  'modal-content':
+    'prefix': 'modal-content'
+    'body': """
+      {{#modal/modal-content}}
+        $1
+      {{/modal/modal-content}}
+    """
+
+  'modal-footer':
+    'prefix': 'modal-footer'
+    'body': """
+      {{#modal/modal-footer}}
+        <button
+          class="button__text"
+          data-role="$1"
+          {{action "cancel"}}>
+          ${2:Cancel}
+        </button>
+
+        <button
+          class="btn"
+          disabled={{${3:isSaveDisabled}}}
+          data-role="$4"
+          {{action "save"}}>
+          ${5:Save}
+        </button>
+      {{/modal/modal-footer}}
+    """
+
+  'section-heading':
+    'prefix': 'section-heading'
+    'body': """
+      {{section-heading
+        type="${1:primary}"
+        title="$2"}}
+    """
+  'readonly':
+    'prefix': 'readonly'
+    'body': """
+      <div class="col s${1:4} readonly-field readonly-field--borderless">
+        <p>${2:_label_text_}</p>
+        <p data-role="${3:_data_role_}">${4}</p>
+      </div>
+    """
+  'form-input':
+    'prefix': 'form-input'
+    'body': """
+      <div class="col s${1:3}">
+        <label class="active">${2:_label_}</label>
+        {{input
+          value=${3:_value_}
+          data-role="${4:_data_role_}"}}
+        {{validation-error message=errors.${5:model.property}}}
+      </div>
+    """
+# Git
+'.text.git-commit':
+  'message':
+    'prefix': 'gca'
+    'body': """
+      ${1:Commit Title}
+
+      Why
+      ---
+      - ${2:Why the change(s) where needed?}
+
+      This PR:
+      ---
+      - ${3:What was added to address the why(s)}
+
+      [Trello](${4:hyperlink})
+    """
+
+# SASS
+'.source.css.scss':
+  'Media Query Small Only':
+    'prefix': 'med-s'
+    'body': """
+      @media screen and ( max-width: $media-s-max) {
+        $1
+      }
+    """
+  'Media Query Media Only':
+    'prefix': 'med-m'
+    'body': """
+      @media screen and ( min-width: $media-m-min ) and ( max-width: $media-m-max ) {
+        $1
+      }
+    """
+  'Media Query Large Only':
+    'prefix': 'med-l'
+    'body': """
+      @media screen and ( min-width: $media-l-min ) and ( max-width: $media-l-max) {
+        $1
+      }
+    """
+  'Media Query Dell Crap':
+    'prefix': 'mediadell'
+    'body': """
+      @media screen and ( min-height: $media-dell-min-height ) and ( max-height: $media-dell-max-height) and ( min-width: $media-xl-min ) {
+        $1
+      }
+    """
+
+# This file uses CoffeeScript Object Notation (CSON).
+# If you are unfamiliar with CSON, you can read more about it here:
+# https://github.com/bevry/cson#what-is-cson
+
+# EMMET
+"handlebars": {
+    "extends": "html"
+    "profile": "handlebars"
+    "filters": "html"
+}
+"javascript": {
+    "extends": "js"
+    "profile": "javascript"
+    "filters": "js"
+}

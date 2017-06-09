@@ -1,0 +1,52 @@
+"*":
+  "atom-beautify":
+    _analyticsUserId: "6350286c-9ad2-488e-822e-b1f01faa32f9"
+  "autocomplete-plus": {}
+  core:
+    disabledPackages: [
+      "jslint"
+      "language-gfm"
+      "linter-scss-lint"
+      "markdown-preview"
+    ]
+    followSymlinks: false
+    ignoredNames: [
+      ".git"
+      "node_modules/"
+      "tmp/"
+      "bower_components/"
+      "vendor/"
+      "public"
+    ]
+    telemetryConsent: "limited"
+    themes: [
+      "one-dark-ui"
+      "firewatch-syntax"
+    ]
+  editor:
+    fontFamily: "inconsolata"
+    fontSize: 17
+    invisibles: {}
+    showIndentGuide: true
+    showInvisibles: true
+    softWrap: true
+  emmet: {}
+  "exception-reporting":
+    userId: "4a7fea86-7e12-5841-d49d-61bde7b4e23b"
+  "file-icons":
+    coloured: false
+    onChanges: true
+  jslint:
+    validateOnChange: true
+  linter: {}
+  minimap: {}
+  "one-light-ui":
+    layoutMode: "Compact"
+  tabs:
+    usePreviewTabs: true
+  "tree-view": {}
+  welcome:
+    showOnStartup: false
+  whitespace: {}
+"linter-scss-lint":
+  disableWhenNoConfigFileInPath: false
