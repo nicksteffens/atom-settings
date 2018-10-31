@@ -1,0 +1,86 @@
+/*
+ * Your Stylesheet
+ *
+ * This stylesheet is loaded when Atom starts up and is reloaded automatically
+ * when it is changed and saved.
+ *
+ * Add your own CSS or Less to fully customize Atom.
+ * If you are unfamiliar with Less, you can read more about it here:
+ * http://lesscss.org
+ */
+
+
+/*
+ * Examples
+ * (To see them, uncomment and save)
+ */
+
+// style the background color of the tree view
+.tree-view {
+  // background-color: whitesmoke;
+}
+
+// style the background and foreground colors on the atom-text-editor-element itself
+atom-text-editor {
+  // color: white;
+  // background-color: hsl(180, 24%, 12%);
+}
+
+// style UI elements inside atom-text-editor
+atom-text-editor .cursor {
+  // border-color: red;
+}
+
+atom-text-editor {
+  text-rendering: optimizeLegibility;
+
+  &.editor .syntax--string.syntax--quoted,
+  &.editor .syntax--string.syntax--regexp {
+    -webkit-font-feature-settings: "liga" off, "calt" off;
+  }
+}
+
+atom-text-editor.editor {
+  /*
+    Transform selected text into alternative font for elegant touch:
+    - this
+    - HTML and JSX attributes
+    - JS functions (except arrow function)
+    - JS undefined
+    - JS storage (const/let/async)
+    - EX constants
+    - Ruby (nil/self/block)
+    - Ruby hash keys
+  */
+  .syntax--variable.syntax--language.syntax--this,
+  .syntax--html > .syntax--attribute-name,
+  .syntax--JSXAttrs > .syntax--attribute-name,
+  // JS
+  .syntax--storage.syntax--type.syntax--js:not(.syntax--function):not(.syntax--arrow),
+  .syntax--constant.syntax--language.syntax--undefined.syntax--js,
+  .syntax--constant.syntax--other.syntax--object.syntax--key.syntax--js,
+  .syntax--keyword.syntax--control.syntax--js,
+  .syntax--storage.syntax--modifier.syntax--async.syntax--js,
+  .syntax--keyword.syntax--other.syntax--debugger.syntax--js,
+  // HBS
+  .syntax--entity.syntax--name.syntax--function.syntax--block.syntax--htmlbars,
+  // elixir
+  .syntax--variable.syntax--other.syntax--constant.syntax--elixir,
+  .syntax--constant.syntax--language.syntax--elixir,
+  // ruby
+  .syntax--constant.syntax--language.syntax--nil.syntax--ruby,
+  .syntax--variable.syntax--language.syntax--self.syntax--ruby,
+  .syntax--constant.syntax--other.syntax--symbol.syntax--hashkey.syntax--ruby,
+  .syntax--variable.syntax--other.syntax--block.syntax--ruby {
+    vertical-align: baseline;
+    font-family: 'Script12 BT';
+    font-size: 120%;
+    font-style: normal !important;
+    height: inherit;
+    line-height: 100%;
+  }
+
+  .syntax--keyword.syntax--other.syntax--debugger.syntax--js { 
+    color: #c66;
+  }
+}
