@@ -2,12 +2,13 @@
   "atom-beautify":
     _analyticsUserId: "6350286c-9ad2-488e-822e-b1f01faa32f9"
   "autocomplete-plus": {}
+  "city-lights-ui": {}
   core:
     disabledPackages: [
       "jslint"
       "language-gfm"
       "linter-scss-lint"
-      "markdown-preview"
+      "linter"
     ]
     followSymlinks: false
     ignoredNames: [
@@ -16,16 +17,15 @@
       "tmp/"
       "bower_components/"
       "vendor/"
-      "public"
+      ".DS_Store"
     ]
     telemetryConsent: "limited"
     themes: [
-      "one-dark-ui"
-      "firewatch-syntax"
+      "city-lights-ui"
+      "operator-mono"
     ]
   editor:
-    fontFamily: "inconsolata"
-    fontSize: 17
+    fontFamily: "Fira Code"
     invisibles: {}
     showIndentGuide: true
     showInvisibles: true
@@ -39,12 +39,21 @@
   jslint:
     validateOnChange: true
   linter: {}
+  "linter-ui-default":
+    panelHeight: 69
+  "markdown-preview":
+    useGitHubStyle: true
   minimap: {}
-  "one-light-ui":
-    layoutMode: "Compact"
+  "one-light-ui": {}
+  "svg-preview":
+    liveUpdate: false
+    openPreviewAutomatically: true
   tabs:
     usePreviewTabs: true
-  "tree-view": {}
+  teletype:
+    askBeforeJoiningPortalViaExternalApp: false
+  "tree-view":
+    hideIgnoredNames: true
   welcome:
     showOnStartup: false
   whitespace: {}
