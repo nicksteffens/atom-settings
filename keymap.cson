@@ -9,8 +9,8 @@
 #
 # Here's an example taken from Atom's built-in keymap:
 #
-# 'atom-text-editor':
-#   'enter': 'editor:newline'
+'atom-text-editor':
+  'esc': 'core:cancel'
 #
 # 'atom-workspace':
 #   'cmd-k ctrl-shift-left': 'pane:move-item-left'
