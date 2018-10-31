@@ -19,9 +19,11 @@
     'prefix': 'debug'
     'body': 'debugger;'
 
+
+# TESTING STUFF FOR QUNIT
   'PauseTest':
     'prefix': 'pauseTest'
-    'body': 'return pauseTest();'
+    'body': 'return this.pauseTest();'
 
   'AndThen':
     'prefix': 'andThen'
@@ -33,31 +35,101 @@
 
   'StopTest':
     'prefix': 'stop'
-    'body': 'return stop();'
-  'test':
+    'body': 'assert.async();'
+
+  'test async':
     'prefix': 'test'
     'body': """
-      test('$1', function(assert) {
+      test('$1', async function(assert) {
+        $2
+      });
+    """
+  'test sync':
+    'prefix': 'test sync'
+    'body': """
+      test('$1',function(assert) {
         $2
       });
     """
   'authenticateSession':
     'prefix': 'authenticateSession'
     'body': """
-      authenticateSession({
-        permissions: {
-          $1
-        },
-      });
+      const dashboardUser = server.create('dashboardUser');
+      authenticateSession({ userId: dashboardUser.id });
     """
-
+  'percySnapshot':
+    'prefix': 'percySnapshot'
+    'body': """
+      percySnapshot(assert);
+    """
+  'import percySnapshot':
+    'prefix': 'import percy'
+    'body': """
+      import { percySnapshot } from 'ember-percy';
+    """
+  'import EventTrackingMixin':
+    'prefix': 'import EventTrackingMixin'
+    'body': """
+      import EventTrackingMixin from 'agency-web-app/mixins/event-tracking';
+    """
   # Ember
+  'import authenticateSession':
+    'prefix': 'import authenticateSession'
+    'body': """
+      import { authenticateSession } from 'ember-simple-auth/test-support';
+    """
+  'import EmberObject':
+    'prefix': 'import EmberObject'
+    'body': """
+      import EmberObject from '@ember/object';
+    """
+  'import computed':
+    'prefix': 'import computed'
+    'body': """
+      import { computed } from '@ember/object';
+    """
+  'import computed property':
+    'prefix': 'import computed_function'
+    'body': """
+      import { ${1:readOnly} } from '@ember/object/computed';
+    """
+  'import setupMirage':
+    'prefix': 'import setupMirage'
+    'body': """
+      import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
+    """
+  'import helpers':
+    'prefix': 'import test-helpers'
+    'body': """
+      import { visit } from '@ember/test-helpers';
+    """
+  'setupMirage':
+    'prefix': 'setupMirage'
+    'body': """
+      setupMirage(hooks);
+    """
   'Run':
     'prefix': 'run'
     'body': """
       Ember.run(()=> {
         $1
       });
+    """
+  'Find':
+    'prefix': 'find'
+    'body':"""
+      find('[data-test-${1:role}]')
+    """
+  # Assert Helpers
+  'assert ok':
+    'prefix': 'ok'
+    'body': """
+      assert.ok(${1:false});
+    """
+  'assert notOk':
+    'prefix': 'notOk'
+    'body': """
+      assert.notOk(${1:true});
     """
   'assert equal':
     'prefix': 'equal'
@@ -68,62 +140,50 @@
         '${3:description_of_assertion}'
       );
     """
-  'assert ok':
-    'prefix': 'ok'
+  'assert.deepEqual':
+    'prefix': 'deepEqual'
     'body': """
-      assert.ok(
+      assert.deepEqual(
         ${1:_something_},
-        '${2:description_of_assertion}'
-      );
+        [
+          ${2:''}
+        ],
+        '${3:description_of_assertion}'
+      )
     """
-  'assert notOk':
-    'prefix': 'notOk'
+  # Assert DOM Helpers
+  'assert.dom':
+    'prefix': 'dom'
     'body': """
-      assert.notOk(
-        ${1:_something_},
-        '${2:description_of_assertion}'
-      );
+      assert.dom('${1:selector}')$2
     """
-  'ember-object-create':
-    'prefix': 'object'
+  'assert.exists':
+    'prefix': 'exists'
     'body': """
-      Ember.Object.create()
+      exists({ count: $1 });
     """
-  'test-invalid-props':
-    'prefix': 'invalid'
+  'assert.doesNotExist':
+    'prefix': 'doesNotExist'
     'body': """
-      testInvalidPropertyValues('${1:prop}', [
-        ${2:something},
-      ], function(subject) {
-        subject.set('${3:prop}', Ember.Object.create());
-      });
+      doesNotExist();
     """
-  'test-valid-props':
-    'prefix': 'valid'
+  # Module Unifications
+  'module.unification.acceptance':
+    'prefix': 'uni acceptance'
     'body': """
-      testValidPropertyValues('${1:prop}', [
-        ${2:something},
-      ], function(subject) {
-        subject.set('${3:prop}', Ember.Object.create());
-      });
+      import { authenticateSession } from 'ember-simple-auth/test-support';
+      import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
+      import { visit } from '@ember/test-helpers';
     """
-  'testForValidator':
-    'prefix': 'validations'
-    'body': """
-      testForValidator('${1:keyName}')
-        .toAllow(
-          '${2:value}'
-        )
-        .toReject(
-          '${3:value}'
-        );
-    """
-
 # Handlbars
 '.text.html.handlebars':
   'data-role':
     'prefix': 'dr'
     'body': 'data-role="$1"'
+
+  'data-test':
+    'prefix': 'dt'
+    'body': 'data-test-$1"'
 
   'modal-container':
     'prefix': 'modal-container'
@@ -210,34 +270,41 @@
 
 # SASS
 '.source.css.scss':
-  'Media Query Small Only':
-    'prefix': 'med-s'
+  'Media Query Percy':
+    'prefix': 'media-percy'
     'body': """
-      @media screen and ( max-width: $media-s-max) {
+      @media only percy {
         $1
       }
     """
-  'Media Query Media Only':
-    'prefix': 'med-m'
-    'body': """
-      @media screen and ( min-width: $media-m-min ) and ( max-width: $media-m-max ) {
-        $1
-      }
-    """
-  'Media Query Large Only':
-    'prefix': 'med-l'
-    'body': """
-      @media screen and ( min-width: $media-l-min ) and ( max-width: $media-l-max) {
-        $1
-      }
-    """
-  'Media Query Dell Crap':
-    'prefix': 'mediadell'
-    'body': """
-      @media screen and ( min-height: $media-dell-min-height ) and ( max-height: $media-dell-max-height) and ( min-width: $media-xl-min ) {
-        $1
-      }
-    """
+  # 'Media Query Small Only':
+  #   'prefix': 'med-s'
+  #   'body': """
+  #     @media screen and ( max-width: $media-s-max) {
+  #       $1
+  #     }
+  #   """
+  # 'Media Query Media Only':
+  #   'prefix': 'med-m'
+  #   'body': """
+  #     @media screen and ( min-width: $media-m-min ) and ( max-width: $media-m-max ) {
+  #       $1
+  #     }
+  #   """
+  # 'Media Query Large Only':
+  #   'prefix': 'med-l'
+  #   'body': """
+  #     @media screen and ( min-width: $media-l-min ) and ( max-width: $media-l-max) {
+  #       $1
+  #     }
+  #   """
+  # 'Media Query Dell Crap':
+  #   'prefix': 'mediadell'
+  #   'body': """
+  #     @media screen and ( min-height: $media-dell-min-height ) and ( max-height: $media-dell-max-height) and ( min-width: $media-xl-min ) {
+  #       $1
+  #     }
+  #   """
 
 # This file uses CoffeeScript Object Notation (CSON).
 # If you are unfamiliar with CSON, you can read more about it here:
